@@ -13,7 +13,6 @@ describe('List.vue', () => {
     // build component
     const Constructor = Vue.extend(List);
     const ListComponent = new Constructor().$mount();
-
     // set input value
     ListComponent.newItem = 'brush my teeth';
 
