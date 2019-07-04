@@ -13,21 +13,30 @@ pipelines:
   branches:
     # When code is pushed to the master branch tests are run automatically
     master:
-      - step:
-          script: 
-            - npm install
-            - npm run test:unit
+       - step:
+          name: Test
+          script:
+          - npm install && npm run test:unit
     # When code is pushed to the master branch it is deployed automatically to the production environment.
     production:
       - step:
           script:
-            - npm install
-            - npm run test:unit
-            - npm run build
-            - pipe: atlassian/firebase-deploy:0.3.0
-              variables:
-                FIREBASE_TOKEN: $FIREBASE_TOKEN
-                PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID.
-                # MESSAGE: 'This is a test web' # Optional.
-                # EXTRA_ARGS: '--only hosting' # Optional.
-                # DEBUG: 'true' # Optional.
+            - step:
+                name: Test
+                script:
+                  - npm install && npm run test:unit
+
+            - step:
+                name: Build
+                script:
+                  - npm install && npm run build
+                artifacts:
+                  - dist/**
+            - step:
+                name: Deploy to Firebase
+                deployment: production
+                script:
+                  - pipe: atlassian/firebase-deploy:0.2.4
+                    variables:
+                      FIREBASE_TOKEN: $FIREBASE_TOKEN
+                      PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID
