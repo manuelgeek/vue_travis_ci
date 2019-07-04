@@ -1,0 +1,32 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:10.15.3
+
+# Doing a full clone to be able to push back to Heroku.
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    # When code is pushed to the master branch tests are run automatically
+    master:
+      - step:
+          script: 
+            - npm install
+            - npm run test:unit
+    # When code is pushed to the master branch it is deployed automatically to the production environment.
+    production:
+      - step:
+          script:
+            - npm install
+            - npm run test:unit
+            - pipe: atlassian/firebase-deploy:0.3.0
+              variables:
+                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID.
+                MESSAGE: 'This is a test web' # Optional.
+                # EXTRA_ARGS: '<string>' # Optional.
+                # DEBUG: '<boolean>' # Optional.
