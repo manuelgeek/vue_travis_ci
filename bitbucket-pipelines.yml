@@ -28,6 +28,6 @@ pipelines:
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID.
-                MESSAGE: 'This is a test web' # Optional.
-                EXTRA_ARGS: '--only hosting' # Optional.
-                DEBUG: 'true' # Optional.
+                # MESSAGE: 'This is a test web' # Optional.
+                # EXTRA_ARGS: '--only hosting' # Optional.
+                # DEBUG: 'true' # Optional.
