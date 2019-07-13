@@ -4,29 +4,34 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:10.15.3
-
 # Doing a full clone to be able to push back to Heroku.
 clone:
   depth: full
-
 pipelines:
   branches:
     # When code is pushed to the master branch tests are run automatically
     master:
-      - step:
-          script: 
-            - npm install
-            - npm run test:unit
-    # When code is pushed to the master branch it is deployed automatically to the production environment.
-    production:
-      - step:
+       - step:
+          name: Test
           script:
-            - npm install
-            - npm run test:unit
-            - pipe: atlassian/firebase-deploy:0.3.0
-              variables:
-                FIREBASE_TOKEN: $FIREBASE_TOKEN
-                PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID.
-                MESSAGE: 'This is a test web' # Optional.
-                EXTRA_ARGS: '--only hosting' # Optional.
-                DEBUG: 'true' # Optional.
+          - npm install && npm run test:unit
+    # When code is pushed to the master branch it is deployed automatically to production .
+    production:
+        - step:
+            name: Test
+            script:
+              - npm install && npm run test:unit
+        - step:
+            name: Build
+            script:
+              - npm install && npm run build
+            artifacts:
+              - dist/**
+        - step:
+            name: Deploy to Firebase
+            deployment: production
+            script:
+              - pipe: atlassian/firebase-deploy:0.2.4
+                variables:
+                  FIREBASE_TOKEN: $FIREBASE_TOKEN
+                  PROJECT_ID: $FIREBASE_TOKEN_PROJECT_ID
