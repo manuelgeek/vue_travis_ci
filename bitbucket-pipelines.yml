@@ -17,7 +17,7 @@ pipelines:
           name: Test
           script:
           - npm install && npm run test:unit
-    # When code is pushed to the master branch it is deployed automatically to the production environment.
+    # When code is pushed to the production branch it is deployed automatically to the production environment.
     production:
         - step:
             name: Test

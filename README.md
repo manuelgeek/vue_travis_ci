@@ -1,4 +1,4 @@
-# vue_pipelines_aceldoret
+# vue_travis
 
 ## Project setup
 ```
