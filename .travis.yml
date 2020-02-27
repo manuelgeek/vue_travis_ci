@@ -17,14 +17,16 @@ before_install:
 after_success:
   - ./travis_merge_script.sh
 
-script:
-  - npm run build
+#script:
+#  - npm run build
 
 deploy:
   - provider: script
     skip_cleanup: true
     script:
+      npm run build ;
       echo "I am true, Deploy here..."
+    #deploy to AWS, Firebase, Heroku
     on:
       branch: master
 
