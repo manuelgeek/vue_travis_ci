@@ -19,13 +19,19 @@ after_success:
 
 script:
   - npm run build
-  - npm run test
 
 deploy:
   - provider: script
     skip_cleanup: true
     script:
-      echo "I am true"
+      echo "I am true, Deploy here..."
     on:
       branch: master
+
+  - provider: script
+    skip_cleanup: true
+    script:
+      npm run test:unit
+    on:
+      branch: dev
 
