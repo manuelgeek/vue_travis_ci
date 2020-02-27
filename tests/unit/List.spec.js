@@ -6,7 +6,7 @@ describe('List.vue', () => {
   it('displays items from the list', () => {
     const Constructor = Vue.extend(List);
     const ListComponent = new Constructor().$mount();
-    expect(ListComponent.$el.textContent).to.contain('play 3 games');
+    expect(ListComponent.$el.textContent).to.contain('play games');
   })
 
   it('adds a new item to list on click', () => {
