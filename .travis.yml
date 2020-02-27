@@ -11,24 +11,27 @@ cache:
 before_script:
   - npm install
 
+before_install:
+  - chmod +x travis_merge_script.sh
+
 after_success:
   - ./travis_merge_script.sh
 
 script:
   - npm run build
 
-test:
-  provider: script
-  skip_cleanup: true
-  script:
-    npm run test
-  on:
-    branch: dev
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    echo "I am true"
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script:
+      echo "I am true"
+    on:
+      branch: master
+
+  - provider: script
+    skip_cleanup: true
+    script:
+      npm run test
+    on:
+      branch: dev
