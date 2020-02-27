@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div>
-    <h1>My To Do List 2020</h1>
+    <h1>My To Do List</h1>
     <br>
     <input v-model="newItem" >
     <button @click="addItemToList">Add</button>
