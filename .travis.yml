@@ -11,6 +11,9 @@ cache:
 before_script:
   - npm install
 
+after_success:
+  - ./travis_merge_script.sh
+
 script:
   - npm run build
 
@@ -19,9 +22,8 @@ test:
   skip_cleanup: true
   script:
     npm run test
-  branches:
-    only:
-      - dev
+  on:
+    branch: dev
 
 deploy:
   provider: script
