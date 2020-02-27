@@ -19,7 +19,7 @@ after_success:
 
 script:
   - npm run build
-
+  - npm run test
 
 deploy:
   - provider: script
@@ -29,9 +29,3 @@ deploy:
     on:
       branch: master
 
-  - provider: script
-    skip_cleanup: true
-    script:
-      npm run test
-    on:
-      branch: dev
