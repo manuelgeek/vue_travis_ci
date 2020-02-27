@@ -4,11 +4,9 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:10.15.3
-
 # Doing a full clone to be able to push back to Heroku.
 clone:
   depth: full
-
 pipelines:
   branches:
     # When code is pushed to the master branch tests are run automatically
@@ -23,7 +21,6 @@ pipelines:
             name: Test
             script:
               - npm install && npm run test:unit
-
         - step:
             name: Build
             script:
