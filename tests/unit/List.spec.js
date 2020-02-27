@@ -27,3 +27,4 @@ describe('List.vue', () => {
     expect(ListComponent.listItems).to.contain('brush my teeth');
   })
 })
+
