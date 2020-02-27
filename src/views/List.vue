@@ -5,7 +5,7 @@
     <br>
     <input v-model="newItem" >
     <button @click="addItemToList">Add</button>
-    <!-- displays list --> 
+    <!-- displays list -->
     <ul>
       <li v-for="(item, index) in listItems" :key='index'>{{ item }}</li>
     </ul>
